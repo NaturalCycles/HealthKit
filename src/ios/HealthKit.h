@@ -27,6 +27,7 @@
 - (void) querySampleType:(CDVInvokedUrlCommand*)command;
 
 - (void) saveQuantitySample:(CDVInvokedUrlCommand*)command;
+- (void) saveCategorySample:(CDVInvokedUrlCommand*)command;
 - (void) saveCorrelation:(CDVInvokedUrlCommand*)command;
 - (void) queryCorrelationType:(CDVInvokedUrlCommand*)command;
 
