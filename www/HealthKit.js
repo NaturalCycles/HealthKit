@@ -108,10 +108,9 @@ define('saveWorkout', {required: 'startDate'}, function(options) {
 define('monitorSampleType', {required: 'sampleType'});
 define('querySampleType', {required: 'sampleType'}, hasValidDates);
 
-define('querySampleTypeAggregated', {required: 'sampleType'}, hasValidDates);
-
 define('queryCorrelationType', {required: 'correlationType'}, hasValidDates);
 define('saveQuantitySample', {required: 'sampleType'}, hasValidDates);
+define('saveCategorySample', {required: 'sampleType'}, hasValidDates);
 
 define('saveCorrelation', {required: ['correlationType', 'samples']}, function(options) {
   hasValidDates(options);
