@@ -16,8 +16,9 @@
 * `checkAuthStatus`: pass in a type and get back on of undetermined | denied | authorized
 * `requestAuthorization`: ask some or all permissions up front
 * `readDateOfBirth`: formatted as yyyy-MM-dd
-* `readGender`: output = male|female|unknown
+* `readGender`: output = male|female|other|unknown
 * `readBloodType`: output = A+|A-|B+|B-|AB+|AB-|O+|O-|unknown
+* `readFitzpatrickSkinType`: output = I|II|III|IV|V|VI|unknown
 * `readWeight`: pass in unit (g=gram, kg=kilogram, oz=ounce, lb=pound, st=stone)
 * `saveWeight`: pass in unit (g=gram, kg=kilogram, oz=ounce, lb=pound, st=stone) and amount
 * `readHeight`: pass in unit (mm=millimeter, cm=centimeter, m=meter, in=inch, ft=foot)
@@ -31,6 +32,7 @@
 * `saveQuantitySample`
 * `saveCorrelation`
 * `queryCorrelationType`
+* `deleteSamples`
 
 ### Resources
 
@@ -39,7 +41,7 @@
 * For functions that require the `unit` attribute, you can find the [comprehensive list of possible units from the Apple Developers documentation](https://developer.apple.com/library/ios/documentation/HealthKit/Reference/HKUnit_Class/index.html#//apple_ref/doc/uid/TP40014727-CH1-SW2).
 
 ### Tips
-* Make sure your app id has the 'HealthKit' entitlement when this plugin is installed (see iOS dev center).
+* Make sure your app id has the 'HealthKit' entitlement when this plugin is installed. This is added automatically to your app if you use cordova-ios 4.3.0 or higher.
 * Also, make sure your app and AppStore description complies with these Apple review guidelines: https://developer.apple.com/app-store/review/guidelines/#healthkit
 
 ### Installation

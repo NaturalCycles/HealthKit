@@ -46,10 +46,14 @@
     <button onclick="readGender()">Read gender</button>
     <br/><br/>
     <button onclick="readBloodType()">Read bloodtype</button>
+    &nbsp;&nbsp;
+    <button onclick="readFitzpatrickSkinType()">Fitzp. Skin type</button>
     <br/><br/>
     <button onclick="querySampleType()">Query Sample</button>
     <br/><br/>
     <button onclick="querySampleTypeAggregated()">Query Sample Aggregated</button>
+    <br/><br/>
+    <button onclick="deleteSamples()">Delete weight samples</button>
     <br/><br/>
     <button onclick="saveHeight()">Save Height</button>
     &nbsp;&nbsp;
@@ -111,14 +115,22 @@
   }
 
   function requestAuthorization() {
+    var supportedTypes = [
+      'HKQuantityTypeIdentifierHeight',
+      'HKQuantityTypeIdentifierStepCount',
+      'HKQuantityTypeIdentifierDistanceWalkingRunning',
+      'HKCategoryTypeIdentifierSleepAnalysis',
+      'HKQuantityTypeIdentifierDietaryEnergyConsumed',
+      'HKQuantityTypeIdentifierDietaryFatTotal'
+    ];
+
     window.plugins.healthkit.requestAuthorization(
         {
-          'readTypes': ['HKCharacteristicTypeIdentifierDateOfBirth',
-            'HKCategoryTypeIdentifierSleepAnalysis', 'HKQuantityTypeIdentifierActiveEnergyBurned', 'HKQuantityTypeIdentifierHeight'],
-          'writeTypes': ['HKQuantityTypeIdentifierDietaryEnergyConsumed', 'HKQuantityTypeIdentifierDietaryFatTotal', 'HKQuantityTypeIdentifierStepCount', 'HKQuantityTypeIdentifierActiveEnergyBurned', 'HKQuantityTypeIdentifierHeight', 'HKQuantityTypeIdentifierDistanceCycling']
+          readTypes: supportedTypes,
+          writeTypes: supportedTypes
         },
-        callback,
-        callback
+        function(){alert('ok')},
+        function(){alert('nok')}
     );
   }
 
@@ -148,6 +160,13 @@
 
   function readBloodType() {
     window.plugins.healthkit.readBloodType(
+        callback,
+        callback
+    );
+  }
+
+  function readFitzpatrickSkinType() {
+    window.plugins.healthkit.readFitzpatrickSkinType(
         callback,
         callback
     );
@@ -228,8 +247,9 @@
         {
           'startDate': new Date(new Date().getTime() - 3 * 24 * 60 * 60 * 1000), // three days ago
           'endDate': new Date(), // now
-          'sampleType': 'HKQuantityTypeIdentifierStepCount', // anything in HealthKit/HKTypeIdentifiers.h
-          'unit': 'count' // make sure this is compatible with the sampleType
+          'sampleType': 'HKQuantityTypeIdentifierBasalBodyTemperature',
+          //'sampleType': 'HKQuantityTypeIdentifierStepCount', // anything in HealthKit/HKTypeIdentifiers.h
+          'unit': 'degF' // make sure this is compatible with the sampleType
         },
         callback,
         callback
@@ -249,6 +269,20 @@
         callback
     );
   }
+
+  // to test, set a few 'weight' samples, then run this
+  function deleteSamples() {
+    window.plugins.healthkit.deleteSamples(
+        {
+          'startDate': new Date(new Date().getTime() - 60 * 60 * 1000), // an hour ago
+          'endDate': new Date(), // now
+          'sampleType': 'HKQuantityTypeIdentifierBodyMass'
+        },
+        callback,
+        callback
+    );
+  }
+
 
   // this is work in progress
   function monitorSampleType() {
